@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-get update
 apt-get upgrade
-apt-get install vim htop iftop git
+apt-get install vim htop iftop git curl
 
 apt-get update
 apt-get install apt-transport-https ca-certificates
@@ -15,3 +15,6 @@ apt-get install linux-image-extra-$(uname -r)
 apt-get update
 apt-get install docker-engine
 service docker status
+
+curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
