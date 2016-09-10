@@ -2,7 +2,7 @@
 skript to install the software for the server
 
 
-wget https://github.com/Nurian/ubuntu-server/blob/master/README.md
+wget https://raw.githubusercontent.com/Nurian/ubuntu-server/master/install.sh
 
 chmod +x install.sh
 
