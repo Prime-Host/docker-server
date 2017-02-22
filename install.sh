@@ -1,7 +1,8 @@
 #!/bin/bash
 apt-get update
 apt-get upgrade -y
-apt-get install vim htop iftop git curl -y
+apt-get install vim htop iftop git curl zsh -y
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 apt-get update
 apt-get install apt-transport-https ca-certificates
