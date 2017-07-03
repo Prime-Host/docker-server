@@ -5,8 +5,9 @@ apt-get update
 apt-get upgrade -y
 apt-get install vim htop iftop git curl zsh -y
 
-# install oh my zsh
+# install oh my zsh with bira theme
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sed -i -- 's/robbyrussell/bira/g' /root/.zshrc
 
 # install docker version with rancher support
 curl https://releases.rancher.com/install-docker/17.03.sh | sh
