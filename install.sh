@@ -17,7 +17,7 @@ curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compos
 chmod +x /usr/local/bin/docker-compose
 
 # alias for better overview
-echo "docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Size}}" -sa" >> /root/.zshrc
+echo  "alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Size}}" -sa'"
 
 echo "export HISTFILESIZE=" >> /root/.bashrc
 echo "export HISTSIZE=" >> /root/.bashrc
