@@ -2,7 +2,7 @@
 
 # install basiscs
 apt-get update
-apt-get upgrade -y
+apt-get dits-upgrade -y
 apt-get install vim htop iftop git curl zsh -y
 
 # install oh my zsh with bira theme
@@ -10,7 +10,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 sed -i -- 's/robbyrussell/bira/g' /root/.zshrc
 
 # install docker version with rancher support
-curl https://releases.rancher.com/install-docker/17.06.sh | sh
+apt-get install docker-ce=17.06.2~ce-0~ubuntu
 
 # install docker-compose
 curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
