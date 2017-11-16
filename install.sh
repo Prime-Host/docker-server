@@ -5,6 +5,14 @@ apt-get update
 apt-get dits-upgrade -y
 apt-get install vim htop iftop git curl zsh -y
 
+# install docker requirments and add repo
+apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
 # install docker version with rancher support
 apt-get install docker-ce=17.06.2~ce-0~ubuntu
 
