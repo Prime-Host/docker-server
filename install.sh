@@ -6,7 +6,7 @@ apt-get dits-upgrade -y
 apt-get install vim htop iftop git curl zsh -y
 
 # install docker requirments and add repo
-apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
+apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual -y
 apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository \
