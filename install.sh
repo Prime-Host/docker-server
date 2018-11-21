@@ -39,4 +39,5 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
  && echo "set fileencoding=utf-8" >> /root/.vimrc \
  && cp -r /root/.oh-my-zsh /etc/skel/. \
  && cp /root/.zshrc /etc/skel/. \
- && cp /root/.vimrc /etc/skel/.
+ && cp /root/.vimrc /etc/skel/. \
+ && chsh -s $(which zsh)
