@@ -1,5 +1,5 @@
 # docker-server
-skript to install docker and other software for Ubuntu 16.04 LTS
+skript to install docker and other software for Ubuntu 18.04 LTS
 
 
 How to install:
