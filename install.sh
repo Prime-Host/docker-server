@@ -28,6 +28,15 @@ echo  "alias dps='docker ps --format "'"'table {{.ID}}\\\\t{{.Names}}\\\\t{{.Ima
 echo "export HISTFILESIZE=" >> /root/.bashrc
 echo "export HISTSIZE=" >> /root/.bashrc
 
-# install oh my zsh with bira theme
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-sed -i -- 's/robbyrussell/bira/g' /root/.zshrc
+# install oh my zsh with custom theme
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true \
+ && cp /root/.oh-my-zsh/themes/bira.zsh-theme /root/.oh-my-zsh/themes/prime-host.zsh-theme \
+ && sed -i 's/%m%/%M%/g' /root/.oh-my-zsh/themes/prime-host.zsh-theme \
+ && sed -i s:/root/.oh-my-zsh:\$HOME/.oh-my-zsh:g /root/.zshrc \
+ && sed -i 's/robbyrussell/prime-host/g' /root/.zshrc \
+ && echo "DISABLE_UPDATE_PROMPT=true" >> /root/.zshrc \
+ && echo "set encoding=utf-8" >> /root/.vimrc \
+ && echo "set fileencoding=utf-8" >> /root/.vimrc \
+ && cp -r /root/.oh-my-zsh /etc/skel/. \
+ && cp /root/.zshrc /etc/skel/. \
+ && cp /root/.vimrc /etc/skel/.
