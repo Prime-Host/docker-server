@@ -41,3 +41,23 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
  && cp /root/.zshrc /etc/skel/. \
  && cp /root/.vimrc /etc/skel/. \
  && chsh -s $(which zsh)
+
+#install netdata monitoring
+docker pull netdata/netdata
+docker run -d --name=netdata \
+  --net="webproxy" \
+  --restart always \
+  -h node002.legendary-server.de \
+  -e TZ="Europe/Berlin" \
+  -e "VIRTUAL_HOST"="stats.node002.legendary-server.de" \
+  -e "LETSENCRYPT_HOST"="stats.node002.legendary-server.de" \
+  -e "LETSENCRYPT_EMAIL"="info@nordloh-webdesign.de" \
+  -e "VIRTUAL_PORT"="19999" \
+  -e PGID=999 \
+  -p 19999:19999 \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  --cap-add SYS_PTRACE \
+  --security-opt apparmor=unconfined \
+  netdata/netdata
