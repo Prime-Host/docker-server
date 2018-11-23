@@ -24,7 +24,6 @@ chmod +x /usr/local/bin/docker-compose
 
 # dps alias for better overview of containers
 echo  "alias dps='docker ps --format "'"'table {{.ID}}\\\\t{{.Names}}\\\\t{{.Image}}\\\\t{{.Status}}\\\\t{{.Size}}'"'" -sa'" >> /root/.zshrc
-
 echo "export HISTFILESIZE=" >> /root/.bashrc
 echo "export HISTSIZE=" >> /root/.bashrc
 
@@ -61,3 +60,6 @@ docker run -d --name=netdata \
   --cap-add SYS_PTRACE \
   --security-opt apparmor=unconfined \
   netdata/netdata
+
+#disable swap
+swapoff -a
