@@ -3,7 +3,7 @@
 # install basiscs
 apt-get update
 apt-get dits-upgrade -y
-apt-get install vim htop iftop git curl zsh -y
+apt-get install vim htop iftop curl zsh borgbackup -y
 
 # install docker and docker-compose
 apt-get install docker.io -y
