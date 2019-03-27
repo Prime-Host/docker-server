@@ -28,7 +28,7 @@ export P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
 docker-compose pull && docker-compose -p ${P_DOMAIN} up -d
 
 # Secure netdata with authentication
-sh -c "echo -n '[netdata]:' >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
+sh -c "echo -n 'netdata:' >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
 sh -c "openssl passwd -apr1 ${P_PASSWORD} >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
 
 # install oh-my-zsh and change theme
