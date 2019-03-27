@@ -36,4 +36,5 @@ echo "export HISTFILESIZE=" >> /root/.bashrc
 echo "export HISTSIZE=" >> /root/.bashrc
 
 echo "System will now reboot"
+sleep 3s
 reboot
