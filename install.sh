@@ -22,8 +22,8 @@ sed -i "s/0.0.0.0/$PROXY_IP_DOCKER/g" .env
 sed -i "s:./nginx-data:/var/docker-data/proxy:g" .env
 ./start.sh
 
-# install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# install oh-my-zsh and change theme
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
 cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i 's/%m%/%M%/g' ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i s:~/.oh-my-zsh:\$HOME/.oh-my-zsh:g ~/.zshrc \
@@ -34,3 +34,6 @@ cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
 echo  "alias dps='docker ps --format "'"'table {{.Names}}\\\\t{{.Image}}\\\\t{{.Status}}\\\\t{{.Size}}'"'" -sa'" >> /root/.zshrc
 echo "export HISTFILESIZE=" >> /root/.bashrc
 echo "export HISTSIZE=" >> /root/.bashrc
+
+echo "System will now reboot"
+reboot
