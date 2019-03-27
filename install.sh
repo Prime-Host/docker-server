@@ -22,6 +22,9 @@ sed -i "s/0.0.0.0/$PROXY_IP_DOCKER/g" .env
 sed -i "s:./nginx-data:/var/docker-data/proxy:g" .env
 ./start.sh
 
+# install netdata container
+P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
+
 # install oh-my-zsh and change theme
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
 cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
