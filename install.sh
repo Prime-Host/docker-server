@@ -24,6 +24,8 @@ sed -i "s:./nginx-data:/var/docker-data/proxy:g" .env
 
 # install netdata container
 P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
+cd ../netdata
+docker-compose pull && docker-compose -p $P_DOMAIN up -d
 
 # install oh-my-zsh and change theme
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
