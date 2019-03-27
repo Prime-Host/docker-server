@@ -4,6 +4,7 @@ services:
     image: netdata/netdata
     container_name: stats.${P_DOMAIN}
     hostname: stats.${P_DOMAIN}
+    restart: always
     ports:
       - "19999"
     cap_add:
