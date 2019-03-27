@@ -25,7 +25,11 @@ sed -i "s:./nginx-data:/var/docker-data/proxy:g" .env
 # install netdata container
 cd ../netdata
 export P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
-docker-compose pull && docker-compose -p $P_DOMAIN up -d
+docker-compose pull && docker-compose -p ${P_DOMAIN} up -d
+
+# Secure netdata with authentication
+sh -c "echo -n '[netdata]:' >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
+sh -c "openssl passwd -apr1 >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
 
 # install oh-my-zsh and change theme
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
