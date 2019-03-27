@@ -2,8 +2,8 @@ version: '3'
 services:
   netdata:
     image: netdata/netdata
-    container_name: ${P_DOMAIN}
-    hostname: ${P_DOMAIN}
+    container_name: stats.${P_DOMAIN}
+    hostname: stats.${P_DOMAIN}
     ports:
       - "19999"
     cap_add:
@@ -16,9 +16,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/lib/docker/data/nedata/cache:/var/cache/netdata
     environment:
-      PRIMEHOST_DOMAIN: ${P_DOMAIN}
-      VIRTUAL_HOST: ${P_DOMAIN}
-      LETSENCRYPT_HOST: ${P_DOMAIN}
+      PRIMEHOST_DOMAIN: stats.${P_DOMAIN}
+      VIRTUAL_HOST: stats.${P_DOMAIN}
+      LETSENCRYPT_HOST: stats.${P_DOMAIN}
       LETSENCRYPT_EMAIL: ${P_MAIL}
       VIRTUAL_PORT: 19999
       PGID: ${P_PGID}
