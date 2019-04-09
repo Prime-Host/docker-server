@@ -9,6 +9,7 @@ apt-get install vim htop iftop curl zsh borgbackup -y
 apt-get install docker.io -y
 curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+systemctl enable docker
 
 # change hostname and reduce swap usage
 echo ${P_DOMAIN} > /etc/hostname 
