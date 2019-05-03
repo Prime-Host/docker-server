@@ -11,9 +11,10 @@ curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/docker-co
 chmod +x /usr/local/bin/docker-compose
 systemctl enable docker
 
-# change hostname and reduce swap usage
+# change hostname, reduce swap usage and create folders
 echo ${P_DOMAIN} > /etc/hostname 
 echo "vm.swappiness=10" >> /etc/sysctl.conf
+mkdir /var/docker-data/env /var/docker-data/container
 
 # install let's encrypt and nginx container
 git clone https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git
