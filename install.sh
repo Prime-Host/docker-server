@@ -41,7 +41,7 @@ cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i 's/%m%/%M%/g' ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i s:~/.oh-my-zsh:\$HOME/.oh-my-zsh:g ~/.zshrc \
  && sed -i 's/robbyrussell/prime-host/g' ~/.zshrc \
- && echo "DISABLE_UPDATE_PROMPT=true" >> ~/.zshrc \
+ && sed -i 's/# DISABLE_UPDATE_PROMPT="true"/DISABLE_UPDATE_PROMPT="true"/g' ~/.zshrc \
  && sed -i 's/plugins=(git)/plugins=(git git-extras docker docker-compose)/g' ~/.zshrc 
 
 
