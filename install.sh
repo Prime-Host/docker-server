@@ -38,7 +38,7 @@ sh -c "openssl passwd -apr1 ${P_PASSWORD} >> /var/docker-data/proxy/htpasswd/sta
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g'"
 chsh -s /bin/zsh
 cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
- && sed -i 's/%m%/%M%/g' ~/.oh-my-zsh/themes/prime-host.zsh-theme \
+ && sed -i 's/%m/%M/g' ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i s:~/.oh-my-zsh:\$HOME/.oh-my-zsh:g ~/.zshrc \
  && sed -i 's/robbyrussell/prime-host/g' ~/.zshrc \
  && sed -i 's/# DISABLE_UPDATE_PROMPT="true"/DISABLE_UPDATE_PROMPT="true"/g' ~/.zshrc \
