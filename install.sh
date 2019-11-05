@@ -14,7 +14,7 @@ systemctl enable docker
 # change hostname, reduce swap usage and create folders
 echo ${P_DOMAIN} > /etc/hostname 
 echo "vm.swappiness=10" >> /etc/sysctl.conf
-mkdir /var/docker-data/env /var/docker-data/container
+mkdir -p /var/docker-data/env /var/docker-data/container
 
 # install let's encrypt and nginx container
 git clone https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git
