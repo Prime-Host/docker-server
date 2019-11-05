@@ -35,9 +35,7 @@ sh -c "echo -n 'netdata:' >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
 sh -c "openssl passwd -apr1 ${P_PASSWORD} >> /var/docker-data/proxy/htpasswd/stats.${P_DOMAIN}"
 
 # install oh-my-zsh and change theme
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g'"
-chsh -s $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 cp ~/.oh-my-zsh/themes/bira.zsh-theme ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i 's/%m/%M/g' ~/.oh-my-zsh/themes/prime-host.zsh-theme \
  && sed -i s:~/.oh-my-zsh:\$HOME/.oh-my-zsh:g ~/.zshrc \
