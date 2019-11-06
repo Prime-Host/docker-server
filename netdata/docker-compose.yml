@@ -5,8 +5,6 @@ services:
     container_name: stats.${P_DOMAIN}
     hostname: stats.${P_DOMAIN}
     restart: always
-    ports:
-      - "19999"
     cap_add:
       - SYS_PTRACE
     security_opt:
@@ -15,7 +13,6 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/lib/docker/data/nedata/cache:/var/cache/netdata
     environment:
       PRIMEHOST_DOMAIN: stats.${P_DOMAIN}
       VIRTUAL_HOST: stats.${P_DOMAIN}
