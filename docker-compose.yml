@@ -1,0 +1,64 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    hostname: traefik.t1.unizell.shop
+    restart: always
+    command:
+      - --api
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+      - --certificatesresolvers.le.acme.email=${P_MAIL}
+      - --certificatesresolvers.le.acme.storage=/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/var/docker/traefik/acme.json:/acme.json"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${P_DOMAIN}`)"      
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.redirs.entrypoints=web"
+      - "traefik.http.routers.redirs.middlewares=redirect-to-https"
+      - "traefik.http.routers.traefik.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=${P_USER}:${P_CRYPT}"
+
+  netdata:
+    image: netdata/netdata
+    container_name: stats.${P_DOMAIN}
+    hostname: stats.${P_DOMAIN}
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      PGID: ${P_PGID}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netdata.tls.certresolver=le"
+      - "traefik.http.routers.netdata.entrypoints=websecure"
+      - "traefik.http.services.netdata.loadbalancer.server.port=19999"
+      - "traefik.http.routers.netdata.rule=Host(`stats.${P_DOMAIN}`)"
+      - "traefik.http.routers.netdata.middlewares=auth"
+      - "traefik.http.middlewares.auth-netdata.basicauth.users=${P_USER}:${P_CRYPT}"
+
+networks:
+  default:
+    external:
+      name: web
