@@ -15,4 +15,6 @@ touch /var/docker/traefik/acme.json
 chmod 600 /var/docker/traefik/acme.json
 cd /root/docker/docker-server
 export P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
+docker pull traefik
+docker pull netdata/netdata
 env $(cat /var/docker/env/traefik.${P_DOMAIN}.env) docker-compose -p traefik.${P_DOMAIN} up -d
