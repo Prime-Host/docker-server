@@ -9,5 +9,5 @@ export P_DOMAIN=example.com && export P_MAIL=info@example.com && export P_PASSWO
 
 One Liner install all:
 ```bash
- git clone https://github.com/Prime-Host/docker-server.git docker/docker-server && bash docker/docker-server/install.sh
+ git clone https://github.com/Prime-Host/docker-server.git /root/docker/docker-server && bash /root/docker/docker-server/install.sh
 ```
