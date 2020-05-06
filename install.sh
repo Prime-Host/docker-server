@@ -13,9 +13,8 @@ chmod +x /usr/local/bin/docker-compose
 systemctl enable docker
 docker network create web
 
-# change hostname, reduce swap usage and create folders
+# change hostname and create folders
 echo ${P_DOMAIN} > /etc/hostname 
-echo "vm.swappiness=10" >> /etc/sysctl.conf
 mkdir -p /var/docker/env /var/docker/container /var/docker/traefik
 
 # create env files for traefik and netdata
