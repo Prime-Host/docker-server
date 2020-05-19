@@ -1,6 +1,10 @@
 # docker-server
 skript to install docker and other software for Ubuntu 18.04 LTS
 
+Requirements:
+```bash
+apt update && apt install git
+```
 
 Change these Variables:
 ```bash
