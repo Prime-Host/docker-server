@@ -3,7 +3,6 @@
 # update & install basiscs
 apt-get update
 apt-get dist-upgrade -y
-docker network create web
 
 # create env files for traefik and netdata
 mkdir -p /var/docker/env /var/docker/container /var/docker/traefik
