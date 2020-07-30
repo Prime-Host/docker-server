@@ -21,6 +21,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/docker/traefik/acme.json:/acme.json"
+    environment:
+      TZ: "Europe/Berlin"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.${P_DOMAIN}`)"      
@@ -49,6 +51,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       PGID: ${P_PGID}
+      TZ: "Europe/Berlin"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.netdata.tls.certresolver=le"
@@ -57,6 +60,22 @@ services:
       - "traefik.http.routers.netdata.rule=Host(`stats.${P_DOMAIN}`)"
       - "traefik.http.routers.netdata.middlewares=auth"
       - "traefik.http.middlewares.auth-netdata.basicauth.users=${P_USER}:${P_CRYPT}"
+      
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin.${P_DOMAIN}
+    hostname: phpmyadmin.${P_DOMAIN}
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+      TZ: "Europe/Berlin"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.phpmyadmin.tls.certresolver=le"
+      - "traefik.http.routers.phpmyadmin.entrypoints=websecure"
+      - "traefik.http.services.phpmyadmin.loadbalancer.server.port=19999"
+      - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.${P_DOMAIN}`)" 
+
 
 networks:
   default:
