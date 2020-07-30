@@ -3,7 +3,7 @@ skript to install docker and other software for Ubuntu 18.04 LTS
 
 Requirements:
 ```bash
-apt update && apt install git
+apt update && apt install -y git
 ```
 
 Change these Variables:
