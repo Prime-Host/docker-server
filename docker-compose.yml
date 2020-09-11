@@ -46,12 +46,18 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
+      #- /var/docker-data/container/netdata/netdatalib:/var/lib/netdata
+      - /var/docker-data/container/netdata/netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       PGID: ${P_PGID}
       TZ: "Europe/Berlin"
+
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.netdata.tls.certresolver=le"
