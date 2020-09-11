@@ -3,12 +3,17 @@
 # update & install basiscs
 apt-get update
 apt-get dist-upgrade -y
-apt-get install vim htop iftop curl wget zsh borgbackup -y
+apt-get install vim htop iftop curl wget zsh apt-transport-https ca-certificates gnupg-agent software-properties-common -y
 
 # install docker and docker-compose
-apt-get install docker.io -y
-cd /root/docker/docker-server
-curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io
+curl -L "https://github.com/docker/compose/releases/download/1.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 systemctl enable docker
 docker network create web
@@ -20,6 +25,8 @@ mkdir -p /var/docker/env /var/docker/container /var/docker/traefik
 # create env files for traefik and netdata
 echo "P_USER=admin" > /var/docker/env/traefik.${P_DOMAIN}.env
 { echo P_CRYPT && openssl passwd -apr1 ${P_PASSWORD}; } | paste -d"=" -s >> /var/docker/env/traefik.${P_DOMAIN}.env
+echo "P_DOMAIN=${P_DOMAIN}" > /var/docker/env/traefik.${P_DOMAIN}.env
+echo "P_MAIL=${P_MAIL}" > /var/docker/env/traefik.${P_DOMAIN}.env
 
 # install traefik and netdata
 touch /var/docker/traefik/acme.json
