@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# update & install basiscs
+# update & install packages
 apt-get update
 apt-get dist-upgrade -y
 apt-get install vim htop iftop curl wget zsh apt-transport-https ca-certificates gnupg-agent software-properties-common -y
+sysctl -w net.core.netdev_budget_usecs=6000
 
 # install docker and docker-compose
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
