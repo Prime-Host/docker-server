@@ -26,8 +26,8 @@ mkdir -p /var/docker/env /var/docker/container /var/docker/traefik
 # create env files for traefik and netdata
 echo "P_USER=admin" > /var/docker/env/traefik.${P_DOMAIN}.env
 { echo P_CRYPT && openssl passwd -apr1 ${P_PASSWORD}; } | paste -d"=" -s >> /var/docker/env/traefik.${P_DOMAIN}.env
-echo "P_DOMAIN=${P_DOMAIN}" > /var/docker/env/traefik.${P_DOMAIN}.env
-echo "P_MAIL=${P_MAIL}" > /var/docker/env/traefik.${P_DOMAIN}.env
+echo "P_DOMAIN=${P_DOMAIN}" >> /var/docker/env/traefik.${P_DOMAIN}.env
+echo "P_MAIL=${P_MAIL}" >> /var/docker/env/traefik.${P_DOMAIN}.env
 
 # install traefik and netdata
 touch /var/docker/traefik/acme.json
