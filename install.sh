@@ -13,7 +13,7 @@ add-apt-repository \
    $(lsb_release -cs) \
    stable"
 apt-get update
-apt-get install docker-ce docker-ce-cli containerd.io
+apt-get install docker-ce docker-ce-cli containerd.io -y
 curl -L "https://github.com/docker/compose/releases/download/1.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 systemctl enable docker
