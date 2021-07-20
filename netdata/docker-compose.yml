@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  netdata:
+    image: netdata/netdata
+    container_name: stats.${P_DOMAIN}
+    hostname: stats.${P_DOMAIN}
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./softnet.conf:/etc/netdata/health.d/softnet.conf:ro
+    environment:
+      PGID: ${P_PGID}
+      TZ: "Europe/Berlin"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netdata.tls.certresolver=le"
+      - "traefik.http.routers.netdata.entrypoints=websecure"
+      - "traefik.http.services.netdata.loadbalancer.server.port=19999"
+      - "traefik.http.routers.netdata.rule=Host(`stats.${P_DOMAIN}`)"
+      - "traefik.http.routers.netdata.middlewares=auth"
+      - "traefik.http.middlewares.auth-netdata.basicauth.users=${P_USER}:${P_CRYPT}"
+      
+volumes:
+  netdatalib:
+  netdatacache:
+
+networks:
+  default:
+    external:
+      name: web
