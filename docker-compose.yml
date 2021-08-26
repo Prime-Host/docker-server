@@ -4,7 +4,7 @@ services:
   traefik:
     image: traefik
     container_name: traefik.${P_DOMAIN}
-    hostname: traefik.t1.unizell.shop
+    hostname: traefik.${P_DOMAIN}
     restart: always
     command:
       - --api
