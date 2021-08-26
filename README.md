@@ -1,5 +1,5 @@
 # docker-server
-script to install docker and other software for Ubuntu 18.04 LTS
+script to install docker and other software for Ubuntu 20.04 LTS
 
 Requirements:
 ```bash
