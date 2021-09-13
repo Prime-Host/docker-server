@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   netdata:
-    image: netdata/netdata
+    image: netdata/netdata:stable
     container_name: stats.${P_DOMAIN}
     hostname: stats.${P_DOMAIN}
     restart: always
