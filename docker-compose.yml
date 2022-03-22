@@ -15,12 +15,15 @@ services:
       - --certificatesresolvers.le.acme.email=${P_MAIL}
       - --certificatesresolvers.le.acme.storage=/acme.json
       - --certificatesresolvers.le.acme.tlschallenge=true
+      - --providers.file.filename=/traefik-tls.toml
+      - --entrypoints.websecure.http.tls.options=default@file
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/docker-data/traefik/acme.json:/acme.json"
+      - "/var/docker-data/traefik/traefik-tls.toml:/traefik-tls.toml"
     environment:
       TZ: "Europe/Berlin"
     labels:
@@ -50,10 +53,6 @@ services:
       - "traefik.http.routers.phpmyadmin.entrypoints=websecure"
       - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
       - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.${P_DOMAIN}`)" 
-
-volumes:
-  netdatalib:
-  netdatacache:
 
 networks:
   default:
