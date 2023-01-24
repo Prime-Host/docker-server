@@ -21,22 +21,22 @@ docker network create web
 
 # change hostname and create folders
 echo ${P_DOMAIN} > /etc/hostname 
-mkdir -p /var/docker-data/env /var/docker-data/container /var/docker-data/traefik
+mkdir -p /docker/env /docker/container /docker/traefik
 
 # create env files for traefik and netdata
-echo "P_USER=admin" > /var/docker-data/env/traefik.${P_DOMAIN}.env
-{ echo P_CRYPT && openssl passwd -apr1 ${P_PASSWORD}; } | paste -d"=" -s >> /var/docker-data/env/traefik.${P_DOMAIN}.env
-echo "P_DOMAIN=${P_DOMAIN}" >> /var/docker-data/env/traefik.${P_DOMAIN}.env
-echo "P_MAIL=${P_MAIL}" >> /var/docker-data/env/traefik.${P_DOMAIN}.env
+echo "P_USER=admin" > /docker/env/traefik.${P_DOMAIN}.env
+{ echo P_CRYPT && openssl passwd -apr1 ${P_PASSWORD}; } | paste -d"=" -s >> /docker/env/traefik.${P_DOMAIN}.env
+echo "P_DOMAIN=${P_DOMAIN}" >> /docker/env/traefik.${P_DOMAIN}.env
+echo "P_MAIL=${P_MAIL}" >> /docker/env/traefik.${P_DOMAIN}.env
 
 # install traefik and netdata
-touch /var/docker-data/traefik/acme.json
-chmod 600 /var/docker-data/traefik/acme.json
+touch /docker/traefik/acme.json
+chmod 600 /docker/traefik/acme.json
 cd /root/docker/docker-server
 export P_PGID=$(grep docker /etc/group | cut -d ':' -f 3)
-env $(cat /var/docker-data/env/traefik.${P_DOMAIN}.env) docker-compose -p traefik.${P_DOMAIN} up -d
+env $(cat /docker/env/traefik.${P_DOMAIN}.env) docker-compose -p traefik.${P_DOMAIN} up -d
 cd /root/docker/docker-server/netdata
-env $(cat /var/docker-data/env/traefik.${P_DOMAIN}.env) docker-compose -p stats.${P_DOMAIN} up -d
+env $(cat /docker/env/traefik.${P_DOMAIN}.env) docker-compose -p stats.${P_DOMAIN} up -d
 
 # install oh-my-zsh and change theme
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended

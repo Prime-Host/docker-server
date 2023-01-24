@@ -23,7 +23,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/docker-data/traefik/acme.json:/acme.json"
-      - "/var/docker-data/traefik/traefik-tls.toml:/traefik-tls.toml"
+      - "/docker/traefik/traefik-tls.toml:/traefik-tls.toml"
     environment:
       TZ: "Europe/Berlin"
     labels:
