@@ -22,7 +22,7 @@ services:
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/var/docker-data/traefik/acme.json:/acme.json"
+      - "/docker/traefik/acme.json:/acme.json"
       - "/docker/traefik/traefik-tls.toml:/traefik-tls.toml"
     environment:
       TZ: "Europe/Berlin"
