@@ -17,6 +17,9 @@ services:
       - --certificatesresolvers.le.acme.tlschallenge=true
       - --providers.file.filename=/traefik-tls.toml
       - --entrypoints.websecure.http.tls.options=default@file
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.permanent=true
     ports:
       - "80:80"
       - "443:443"
